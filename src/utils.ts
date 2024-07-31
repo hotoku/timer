@@ -1,4 +1,6 @@
 export function ringBell() {
+  console.log("ringing bell", new Date().toISOString());
+  return;
   // Create an audio context
   const audioContext = new window.AudioContext();
 

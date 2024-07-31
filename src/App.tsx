@@ -1,36 +1,54 @@
-import { useEffect, useState } from "react";
-import { ringBell } from "./utils";
+import React, { useEffect, useRef, useState } from "react";
+import Bell from "./Bell";
 
-function App() {
+import "./App.css";
+
+function App(): React.ReactElement {
+  const bell = useRef<Bell | null>(null);
   const [running, setRunning] = useState(false);
-  const [schedule, setSchedule] = useState<ReturnType<typeof startRing> | null>(
-    null
-  );
-  const startRing = () => {
-    ringBell();
-    const ret = setInterval(() => {
-      ringBell();
-    }, 1000);
-    setSchedule(ret);
-    return ret;
-  };
-  const stopRing = () => {
-    if (schedule) {
-      clearInterval(schedule);
-      setSchedule(null);
+  const [intervals, setIntervals] = useState<number[]>([]);
+  const startHandler = () => {
+    if (bell.current) {
+      bell.current.start();
+      setRunning(bell.current.running);
     }
   };
+  const stopHandler = () => {
+    if (bell.current) {
+      bell.current.stop();
+      setRunning(bell.current.running);
+    }
+  };
+
+  useEffect(() => {
+    bell.current = new Bell();
+  }, []);
   return (
-    <>
-      <div>running = {JSON.stringify(running)}</div>
-      <div>
-        <button onClick={startRing}>start</button>
-        <button onClick={stopRing}>stop</button>
+    <div className="app">
+      <div className="controller">
+        <div className="status">running={`${running}`}</div>
+        <div className="buttons">
+          <button className="button" onClick={startHandler}>
+            start
+          </button>
+          <button className="button" onClick={stopHandler}>
+            stop
+          </button>
+        </div>
       </div>
-      <div>
-        <button onClick={ringBell}>ring</button>
+      <div className="scheduler">
+        {intervals.map((interval, index) => {
+          return (
+            <div key={index} className="interval">
+              <span>{interval}</span>
+              <button>-</button>
+            </div>
+          );
+        })}
+        <input type="number" min={1} />
+        <button onClick={() => console.log("+")}>+</button>
       </div>
-    </>
+    </div>
   );
 }
 
