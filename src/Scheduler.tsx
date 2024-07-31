@@ -57,7 +57,7 @@ function Scheduler(): React.ReactElement {
           +
         </ScheduleButton>
       </ScheduleLine>
-      <SaveButton onClick={() => setBell(bell.stop())}>Save</SaveButton>
+      <SaveButton onClick={() => setBell(bell.stop())}>save</SaveButton>
     </Panel>
   );
 }
@@ -79,13 +79,22 @@ const ScheduleValue = styled.span`
   min-width: 5rem;
   text-align: center;
 `;
-const ScheduleButton = styled.button`
+const ScheduleButton = styled.button<{ disabled: boolean }>`
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  width: 2rem;
+  height: 2rem;
   margin-left: var(--basic-gap);
-  width: 3rem;
+  border-radius: var(--basic-radius);
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
 `;
 const ScheduleInput = styled.input`
   width: 5rem;
 `;
 const SaveButton = styled.button`
   margin-top: var(--basic-gap);
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  padding: var(--small-gap) calc(var(--basic-gap) * 2);
+  border-radius: var(--basic-radius);
 `;
