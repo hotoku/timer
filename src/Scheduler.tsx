@@ -9,15 +9,16 @@ function Scheduler(): React.ReactElement {
   const [val, setVal] = useState(0);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value === "") {
-      setVal(0);
-    } else {
-      setVal(parseInt(e.target.value));
+    let val = 0;
+    try {
+      val = parseFloat(e.target.value);
+    } catch (e) {
+      console.error(e);
     }
+    setVal(val);
   };
   const handleMinus = (i: number) => () => {
     const intervals = bell.intervals.filter((_, j) => i !== j);
-    console.log("intervals", intervals);
     const ret = bell.stop();
     const ret2 = new Bell(ret.running, intervals);
     setBell(ret2);

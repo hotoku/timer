@@ -15,7 +15,6 @@ class Bell {
     if (this.running) {
       ringBell();
       const interval = this.intervals[this.pos];
-      console.log("interval", interval);
       this.pos += 1;
       this.pos %= this.intervals.length;
       this.nextSchdule = window.setTimeout(() => {
