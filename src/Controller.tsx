@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 function Controller(): React.ReactElement {
   const bell = useAtomValue(bellAtom);
+  console.log("Contrloller");
 
   const [running, setRunning] = useState(false);
   const startHandler = () => {
@@ -32,7 +33,7 @@ function Controller(): React.ReactElement {
 export default Controller;
 
 const Panel = styled.div`
-  padding: 3px;
+  padding: 5px;
   background-color: #ddd;
   margin-bottom: 5px;
   border-radius: 3px;
