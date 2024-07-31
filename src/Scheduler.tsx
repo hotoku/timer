@@ -2,11 +2,11 @@ import { useAtom } from "jotai";
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { bellAtom } from "./atoms";
+import Bell from "./Bell";
 
 function Scheduler(): React.ReactElement {
   const [bell, setBell] = useAtom(bellAtom);
   const [val, setVal] = useState(0);
-  console.log("Scheduler");
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === "") {
@@ -19,14 +19,14 @@ function Scheduler(): React.ReactElement {
     const intervals = bell.intervals.filter((_, j) => i !== j);
     console.log("intervals", intervals);
     const ret = bell.stop();
-    ret.intervals = intervals;
-    setBell(ret);
+    const ret2 = new Bell(ret.running, intervals);
+    setBell(ret2);
   };
   const handlePlus = () => {
     const intervals = [...bell.intervals, val];
     const ret = bell.stop();
-    ret.intervals = intervals;
-    setBell(ret);
+    const ret2 = new Bell(ret.running, intervals);
+    setBell(ret2);
     setVal(0);
   };
 
