@@ -14,7 +14,8 @@ const GlobalStyles = createGlobalStyle`
     --font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
     --basic-gap: 5px;
     --small-gap: 3px;
-    --basic-radius: 3px;    
+    --basic-radius: 3px;
+    --border-width: 1px;
 }
 
 a:link,

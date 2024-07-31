@@ -33,9 +33,11 @@ export default Controller;
 
 const Panel = styled.div`
   padding: var(--basic-gap);
-  background-color: var(--bg-color);
+  background-color: transparent;
   margin-bottom: var(--basic-gap);
   border-radius: var(--basic-radius);
+  border: var(--border-width) solid var(--primary-color);
+  font-size: 1.2rem;
 `;
 
 const Status = styled.div`
@@ -47,6 +49,7 @@ const Button = styled.button<{ $isFirst: boolean }>`
   margin-top: var(--basic-gap);
   background-color: var(--primary-color);
   color: var(--light-text-color);
-  padding: var(--small-gap) calc(var(--basic-gap) * 2);
+  padding: var(--basic-gap) calc(var(--basic-gap) * 2);
   border-radius: var(--basic-radius);
+  font-size: 1.5rem;
 `;

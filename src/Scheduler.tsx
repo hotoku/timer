@@ -66,9 +66,11 @@ export default Scheduler;
 
 const Panel = styled.div`
   padding: var(--basic-gap);
-  background-color: var(--bg-color);
+  background-color: transparent;
+  border: var(--border-width) solid var(--primary-color);
   margin-bottom: var(--basic-gap);
   border-radius: var(--basic-radius);
+  font-size: 1.5rem;
 `;
 
 const ScheduleLine = styled.div<{ $isFirst: boolean }>`
@@ -87,14 +89,20 @@ const ScheduleButton = styled.button<{ disabled: boolean }>`
   margin-left: var(--basic-gap);
   border-radius: var(--basic-radius);
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  font-size: 1.5rem;
 `;
 const ScheduleInput = styled.input`
   width: 5rem;
+  height: 2rem;
+  background-color: var(--bg-color);
+  border-radius: var(--basic-radius);
+  font-size: 1.5rem;
 `;
 const SaveButton = styled.button`
   margin-top: var(--basic-gap);
   background-color: var(--primary-color);
   color: var(--light-text-color);
-  padding: var(--small-gap) calc(var(--basic-gap) * 2);
+  padding: var(--basic-gap) calc(var(--basic-gap) * 2);
   border-radius: var(--basic-radius);
+  font-size: 1.5rem;
 `;

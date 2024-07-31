@@ -18,4 +18,6 @@ export default App;
 const Base = styled.div`
   font-family: var(--font-family);
   color: var(--text-color);
+  width: 20rem;
+  margin: 0 auto;
 `;
