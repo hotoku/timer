@@ -1,20 +1,17 @@
-import React, { useState } from "react";
-import { useAtomValue } from "jotai";
-import { bellAtom } from "./atoms";
+import React from "react";
+import { useAtom, useAtomValue } from "jotai";
+import { bellAtom, runningAtom } from "./atoms";
 import styled from "styled-components";
 
 function Controller(): React.ReactElement {
-  const bell = useAtomValue(bellAtom);
-  console.log("Contrloller");
+  const [bell, setBell] = useAtom(bellAtom);
+  const running = useAtomValue(runningAtom);
 
-  const [running, setRunning] = useState(false);
   const startHandler = () => {
-    bell.start();
-    setRunning(bell.running);
+    setBell(bell.start());
   };
   const stopHandler = () => {
-    bell.stop();
-    setRunning(bell.running);
+    setBell(bell.stop());
   };
 
   return (

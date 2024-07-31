@@ -5,10 +5,10 @@ class Bell {
   running: boolean;
   intervals: number[];
   pos: number;
-  constructor(s: number[] = [1]) {
+  constructor(running: boolean = false, intervals: number[] = [1]) {
     this.nextSchdule = null;
-    this.running = false;
-    this.intervals = s;
+    this.running = running;
+    this.intervals = intervals;
     this.pos = 0;
   }
   loop() {
@@ -23,17 +23,23 @@ class Bell {
       }, interval * 1000);
     }
   }
-  start() {
-    console.log("start");
-    if (!this.running) {
-      this.running = true;
-      this.loop();
+  start(): Bell {
+    if (this.running) {
+      return this;
+    } else {
+      const ret = new Bell(true, this.intervals);
+      ret.loop();
+      return ret;
     }
   }
-  stop() {
-    this.running = false;
-    if (this.nextSchdule) {
-      window.clearTimeout(this.nextSchdule);
+  stop(): Bell {
+    if (!this.running) {
+      return this;
+    } else {
+      if (this.nextSchdule) {
+        window.clearTimeout(this.nextSchdule);
+      }
+      return new Bell(false, this.intervals);
     }
   }
 }
