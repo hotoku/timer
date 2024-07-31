@@ -17,5 +17,5 @@ export function ringBell() {
   // Stop the oscillator after 1 second
   setTimeout(() => {
     oscillator.stop();
-  }, 500);
+  }, 300);
 }
