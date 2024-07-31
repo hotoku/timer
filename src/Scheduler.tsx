@@ -80,8 +80,8 @@ const ScheduleValue = styled.span`
   text-align: center;
 `;
 const ScheduleButton = styled.button<{ disabled: boolean }>`
-  background-color: var(--primary-color);
-  color: var(--bg-color);
+  background-color: var(--secondary-color);
+  color: var(--light-text-color);
   width: 2rem;
   height: 2rem;
   margin-left: var(--basic-gap);
@@ -94,7 +94,7 @@ const ScheduleInput = styled.input`
 const SaveButton = styled.button`
   margin-top: var(--basic-gap);
   background-color: var(--primary-color);
-  color: var(--bg-color);
+  color: var(--light-text-color);
   padding: var(--small-gap) calc(var(--basic-gap) * 2);
   border-radius: var(--basic-radius);
 `;

@@ -3,8 +3,11 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
 :root {
     --text-color: #0d0d0d;
+    --light-text-color: #f0f0f0;
     --bg-color: #d9d9d9;
-    --primary-color: #260101;
+    --primary-color: #01238E;
+    --secondary-color: #42AB84;
+    --alert-color: #E31E27;
  }
 
  :root {

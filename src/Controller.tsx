@@ -46,7 +46,7 @@ const Button = styled.button<{ $isFirst: boolean }>`
   ${(props) => (props.$isFirst ? "" : "margin-left: var(--small-gap);")}
   margin-top: var(--basic-gap);
   background-color: var(--primary-color);
-  color: var(--bg-color);
+  color: var(--light-text-color);
   padding: var(--small-gap) calc(var(--basic-gap) * 2);
   border-radius: var(--basic-radius);
 `;
