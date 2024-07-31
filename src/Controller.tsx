@@ -18,10 +18,12 @@ function Controller(): React.ReactElement {
     <Panel>
       <Status className="status">running={`${running}`}</Status>
       <div className="buttons">
-        <button onClick={startHandler}>start</button>
-        <button style={{ marginLeft: "5px" }} onClick={stopHandler}>
+        <Button onClick={startHandler} $isFirst={true}>
+          start
+        </Button>
+        <Button onClick={stopHandler} $isFirst={false}>
           stop
-        </button>
+        </Button>
       </div>
     </Panel>
   );
@@ -30,12 +32,16 @@ function Controller(): React.ReactElement {
 export default Controller;
 
 const Panel = styled.div`
-  padding: 5px;
-  background-color: #ddd;
-  margin-bottom: 5px;
-  border-radius: 3px;
+  padding: var(--basic-gap);
+  background-color: var(--bg-color);
+  margin-bottom: var(--basic-gap);
+  border-radius: var(--basic-radius);
 `;
 
 const Status = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: calc(var(--basic-gap) * 2);
+`;
+
+const Button = styled.button<{ $isFirst: boolean }>`
+  ${(props) => (props.$isFirst ? "" : "margin-left: var(--small-gap);")}
 `;
