@@ -3,9 +3,11 @@ import { ringBell } from "./utils";
 class Bell {
   nextSchdule: number | null;
   running: boolean;
-  constructor() {
+  schedule: number[];
+  constructor(s: number[] = [1]) {
     this.nextSchdule = null;
     this.running = false;
+    this.schedule = s;
   }
   loop() {
     if (this.running) {

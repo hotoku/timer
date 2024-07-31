@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAtomValue } from "jotai";
 import { bellAtom } from "./atoms";
+import styled from "styled-components";
 
 function Controller(): React.ReactElement {
   const bell = useAtomValue(bellAtom);
@@ -16,18 +17,27 @@ function Controller(): React.ReactElement {
   };
 
   return (
-    <div className="controller">
-      <div className="status">running={`${running}`}</div>
+    <Panel>
+      <Status className="status">running={`${running}`}</Status>
       <div className="buttons">
-        <button className="button" onClick={startHandler}>
-          start
-        </button>
-        <button className="button" onClick={stopHandler}>
+        <button onClick={startHandler}>start</button>
+        <button style={{ marginLeft: "5px" }} onClick={stopHandler}>
           stop
         </button>
       </div>
-    </div>
+    </Panel>
   );
 }
 
 export default Controller;
+
+const Panel = styled.div`
+  padding: 3px;
+  background-color: #ddd;
+  margin-bottom: 5px;
+  border-radius: 3px;
+`;
+
+const Status = styled.div`
+  margin-bottom: 10px;
+`;
