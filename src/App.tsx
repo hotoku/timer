@@ -3,11 +3,13 @@ import React from "react";
 import Controller from "./Controller";
 import Scheduler from "./Scheduler";
 import { styled } from "styled-components";
+import ScheduleList from "./ScheduleList";
 
 function App(): React.ReactElement {
   return (
     <Base>
       <Controller />
+      <ScheduleList />
       <Scheduler />
     </Base>
   );

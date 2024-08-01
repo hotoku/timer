@@ -2,6 +2,7 @@ import React from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { bellAtom, runningAtom } from "./atoms";
 import styled from "styled-components";
+import Panel from "./Panel";
 
 function Controller(): React.ReactElement {
   const [bell, setBell] = useAtom(bellAtom);
@@ -30,15 +31,6 @@ function Controller(): React.ReactElement {
 }
 
 export default Controller;
-
-const Panel = styled.div`
-  padding: var(--basic-gap);
-  background-color: transparent;
-  margin-bottom: var(--basic-gap);
-  border-radius: var(--basic-radius);
-  border: var(--border-width) solid var(--primary-color);
-  font-size: 1.2rem;
-`;
 
 const Status = styled.div`
   margin-bottom: calc(var(--basic-gap) * 2);

@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import { bellAtom } from "./atoms";
 import Bell from "./Bell";
+import { saveSchedule } from "./Storage";
+import Panel from "./Panel";
 
 function Scheduler(): React.ReactElement {
   const [bell, setBell] = useAtom(bellAtom);
   const [val, setVal] = useState(0);
+  const [name, setName] = useState("");
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = 0;
@@ -29,6 +32,17 @@ function Scheduler(): React.ReactElement {
     const ret2 = new Bell(ret.running, intervals);
     setBell(ret2);
     setVal(0);
+  };
+  const handleSave = () => {
+    setBell(bell.stop());
+    const obj = {
+      name: name,
+      intervals: bell.intervals,
+    };
+    saveSchedule(obj);
+  };
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
   };
 
   return (
@@ -58,7 +72,12 @@ function Scheduler(): React.ReactElement {
             +
           </ScheduleButton>
         </ScheduleLine>
-        <SaveButton onClick={() => setBell(bell.stop())}>save</SaveButton>
+        <ScheduleLine $isFirst={false}>
+          <SaveButton disabled={name === ""} onClick={handleSave}>
+            save
+          </SaveButton>
+          <NameInput type="text" value={name} onChange={handleNameChange} />
+        </ScheduleLine>
       </Inner>
     </Panel>
   );
@@ -66,14 +85,6 @@ function Scheduler(): React.ReactElement {
 
 export default Scheduler;
 
-const Panel = styled.div`
-  padding: var(--basic-gap);
-  background-color: transparent;
-  border: var(--border-width) solid var(--primary-color);
-  margin-bottom: var(--basic-gap);
-  border-radius: var(--basic-radius);
-  font-size: 1.5rem;
-`;
 const Inner = styled.div`
   margin: 0 auto;
 `;
@@ -97,19 +108,33 @@ const ScheduleButton = styled.button<{ disabled: boolean }>`
   font-size: 1.5rem;
 `;
 const ScheduleInput = styled.input`
+  display: inline-block;
   width: 5rem;
   height: 2rem;
   background-color: var(--bg-color);
   border-radius: var(--basic-radius);
   font-size: 1.5rem;
   text-align: center;
+  vertical-align: top;
 `;
-const SaveButton = styled.button`
-  margin-top: var(--basic-gap);
+const SaveButton = styled.button<{ disabled: boolean }>`
   background-color: var(--primary-color);
   color: var(--light-text-color);
-  padding: var(--basic-gap) calc(var(--basic-gap) * 2);
   border-radius: var(--basic-radius);
   width: 5rem;
+  height: 2rem;
+  line-height: 2rem;
   font-size: 1.5rem;
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+`;
+const NameInput = styled.input`
+  display: inline-block;
+  width: 10rem;
+  height: 2rem;
+  background-color: var(--bg-color);
+  border-radius: var(--basic-radius);
+  font-size: 1.5rem;
+  text-align: center;
+  margin-left: var(--small-gap);
+  vertical-align: top;
 `;
