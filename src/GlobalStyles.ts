@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle`
     --primary-color: #01238E;
     --secondary-color: #42AB84;
     --alert-color: #E31E27;
+    --header-bg-color: var(--primary-color);
  }
 
  :root {

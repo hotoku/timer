@@ -1,16 +1,23 @@
 import React from "react";
 
-import Controller from "./Controller";
-import Scheduler from "./Scheduler";
 import { styled } from "styled-components";
-import ScheduleList from "./ScheduleList";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Player from "./Player";
+import Editor from "./Editor";
+import Header from "./Header";
 
 function App(): React.ReactElement {
   return (
     <Base>
-      <Controller />
-      <ScheduleList />
-      <Scheduler />
+      <BrowserRouter basename="/timer">
+        <Header />
+        <Main>
+          <Routes>
+            <Route path="/" element={<Player />} />
+            <Route path="/edit" element={<Editor />} />
+          </Routes>
+        </Main>
+      </BrowserRouter>
     </Base>
   );
 }
@@ -20,6 +27,8 @@ export default App;
 const Base = styled.div`
   font-family: var(--font-family);
   color: var(--text-color);
+`;
+const Main = styled.div`
   width: 20rem;
-  margin: 0 auto;
+  margin: var(--basic-gap) auto;
 `;
