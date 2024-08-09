@@ -11,7 +11,7 @@ function Header(): React.ReactElement {
             <MyLink to="/">player</MyLink>
           </li>
           <li>
-            <MyLink to="/edit">edit</MyLink>
+            <MyLink to="/edit">editor</MyLink>
           </li>
         </ul>
       </nav>
