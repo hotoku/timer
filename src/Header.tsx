@@ -8,10 +8,10 @@ function Header(): React.ReactElement {
       <nav>
         <ul>
           <li>
-            <Link to="/">player</Link>
+            <MyLink to="/">player</MyLink>
           </li>
           <li>
-            <Link to="/edit">edit</Link>
+            <MyLink to="/edit">edit</MyLink>
           </li>
         </ul>
       </nav>
@@ -20,6 +20,12 @@ function Header(): React.ReactElement {
 }
 
 export default Header;
+
+const MyLink = styled(Link)`
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+`;
 
 const MyHeader = styled.header`
   background-color: var(--header-bg-color);
