@@ -3,20 +3,24 @@ import { loadSchedules, Schedule } from "./Storage";
 import Panel from "./Panel";
 import { styled } from "styled-components";
 import { bellAtom } from "./atoms";
-import { useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import Bell from "./Bell";
 
 function ScheduleList(): React.ReactElement {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
-  const setBell = useSetAtom(bellAtom);
+  const [bell, setBell] = useAtom(bellAtom);
 
   useEffect(() => {
     const ss = loadSchedules();
     setSchedules(ss);
-  }, []);
+    if (ss.length > 0) {
+      setBell(new Bell(false, ss[0].intervals));
+    }
+  }, [setBell]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const s = schedules[parseInt(e.target.value)];
+    bell.stop();
     setBell(new Bell(false, s.intervals));
   };
 

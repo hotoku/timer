@@ -5,6 +5,7 @@ import { styled } from "styled-components";
 
 function ScheduleViewer(): React.ReactElement {
   const bell = useAtomValue(bellAtom);
+  console.log("bell", bell.intervals);
 
   return (
     <>
