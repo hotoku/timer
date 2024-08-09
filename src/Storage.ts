@@ -23,3 +23,10 @@ export function loadSchedules(): ScheduleList {
   const json = localStorage.getItem(storageName);
   return json ? ScheduleList.parse(JSON.parse(json)) : [];
 }
+
+export function deleteSchedule(name: string): void {
+  const json = localStorage.getItem(storageName);
+  const schedules = json ? ScheduleList.parse(JSON.parse(json)) : [];
+  const schedules2 = schedules.filter((s) => s.name !== name);
+  localStorage.setItem(storageName, JSON.stringify(schedules2));
+}
