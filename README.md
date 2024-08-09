@@ -1,6 +1,7 @@
 # timer
 
-## tasks
+## デプロイ
 
-- スケジュールの crud 管理画面
-- browser router
+```shell
+make
+```
