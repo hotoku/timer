@@ -13,8 +13,8 @@ const GlobalStyles = createGlobalStyle`
 
  :root {
     --font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-    --basic-gap: 5px;
-    --small-gap: 3px;
+    --basic-gap: 8px;
+    --small-gap: 4px;
     --basic-radius: 3px;
     --border-width: 1px;
 }
