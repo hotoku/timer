@@ -3,6 +3,7 @@ import { z } from "zod";
 const Schedule = z.object({
   name: z.string(),
   intervals: z.array(z.number()),
+  tones: z.array(z.number()),
 });
 export type Schedule = z.infer<typeof Schedule>;
 

@@ -5,13 +5,17 @@ import { styled } from "styled-components";
 
 function ScheduleViewer(): React.ReactElement {
   const bell = useAtomValue(bellAtom);
-  console.log("bell", bell.intervals);
+  const n = bell.intervals.length;
 
   return (
     <>
       <List>
-        {bell.intervals.map((s, i) => {
-          return <li key={i}>{s}</li>;
+        {Array.from({ length: n }, (_, i) => i).map((i) => {
+          return (
+            <li key={i}>
+              {bell.intervals[i]} {bell.tones[i]}
+            </li>
+          );
         })}
       </List>
     </>

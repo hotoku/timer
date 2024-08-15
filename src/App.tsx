@@ -29,6 +29,6 @@ const Base = styled.div`
   color: var(--text-color);
 `;
 const Main = styled.div`
-  width: 20rem;
+  width: 30rem;
   margin: var(--basic-gap) auto;
 `;

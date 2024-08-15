@@ -14,14 +14,14 @@ function ScheduleList(): React.ReactElement {
     const ss = loadSchedules();
     setSchedules(ss);
     if (ss.length > 0) {
-      setBell(new Bell(false, ss[0].intervals));
+      setBell(new Bell(false, ss[0].intervals, ss[0].tones));
     }
   }, [setBell]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const s = schedules[parseInt(e.target.value)];
     bell.stop();
-    setBell(new Bell(false, s.intervals));
+    setBell(new Bell(false, s.intervals, s.tones));
   };
 
   return (

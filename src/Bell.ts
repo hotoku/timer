@@ -32,7 +32,7 @@ class Bell {
     if (this.running) {
       return this;
     } else {
-      const ret = new Bell(true, this.intervals);
+      const ret = new Bell(true, this.intervals, this.tones);
       ret.loop();
       return ret;
     }
@@ -44,7 +44,7 @@ class Bell {
       if (this.nextSchdule) {
         window.clearTimeout(this.nextSchdule);
       }
-      return new Bell(false, this.intervals);
+      return new Bell(false, this.intervals, this.tones);
     }
   }
 }

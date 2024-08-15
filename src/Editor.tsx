@@ -8,8 +8,11 @@ import {
   Schedule,
 } from "./Storage";
 
+type Tone = "high" | "low";
+
 function Editor(): React.ReactElement {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
+  const [tones, setTones] = useState<Tone[]>([]);
   const [name, setName] = useState("");
   const [intervals, setIntervals] = useState<number[]>([]);
   useEffect(() => {
@@ -18,23 +21,31 @@ function Editor(): React.ReactElement {
     if (ss.length > 0) {
       setName(ss[0].name);
       setIntervals(ss[0].intervals);
+      setTones(ss[0].tones.map((x) => (x === 440 ? "high" : "low")));
     }
   }, []);
+  console.log("tones=", tones);
   const handleClickNew = () => {
     setName("");
     setIntervals([]);
   };
   const handleClickAdd = () => {
     setIntervals([...intervals, 1]);
+    setTones([...tones, "high"]);
   };
   const handleClickDel = (i: number) => {
     setIntervals(intervals.filter((_, j) => j !== i));
+    setTones(tones.filter((_, j) => j !== i));
   };
   const handleIntervalChange = (i: number, v: number) => {
     setIntervals(intervals.map((x, j) => (i === j ? v : x)));
   };
   const handleClickSave = () => {
-    saveSchedule({ name, intervals });
+    saveSchedule({
+      name,
+      intervals,
+      tones: tones.map((t) => (t === "high" ? 440 : 220)),
+    });
     const ss = loadSchedules();
     setSchedules(ss);
   };
@@ -52,6 +63,9 @@ function Editor(): React.ReactElement {
     const ss = loadSchedules();
     setSchedules(ss);
   };
+  const handleToneChange = (i: number, value: Tone) => () => {
+    setTones(tones.map((tone, j) => (j === i ? value : tone)));
+  };
   const nomatch = "__no_match__";
   const selected = (
     schedules.find((s) => s.name === name) ?? {
@@ -59,7 +73,10 @@ function Editor(): React.ReactElement {
       intervals: [],
     }
   ).name;
-  console.log("selected=", selected);
+  const toneValues = [
+    { name: "high" as Tone, freq: 440 },
+    { name: "low" as Tone, freq: 220 },
+  ];
   return (
     <>
       <Panel>
@@ -93,6 +110,27 @@ function Editor(): React.ReactElement {
                   handleIntervalChange(i, parseFloat(e.target.value))
                 }
               ></IntervalInput>
+              <ToneSelector>
+                {toneValues.map((tone, j) => {
+                  return (
+                    <ToneOption
+                      key={j}
+                      onClick={handleToneChange(i, tone.name)}
+                    >
+                      <ToneInput
+                        id={`tone-${i}-${j}`}
+                        value={tone.name}
+                        type="radio"
+                        checked={tones[i] === tone.name}
+                        readOnly
+                      />
+                      <ToneLabel htmlFor={`#tone-${i}-${j}`}>
+                        {tone.name}
+                      </ToneLabel>
+                    </ToneOption>
+                  );
+                })}
+              </ToneSelector>
               <DelButton onClick={() => handleClickDel(i)}>-</DelButton>
             </IntervalLine>
           );
@@ -183,3 +221,17 @@ const SaveButton = styled(Button)<{ disabled?: boolean }>`
 `;
 
 const DeleteButton = styled(SaveButton)``;
+
+const ToneSelector = styled.div`
+  display: inline-block;
+  margin-left: var(--small-gap);
+  span:nth-of-type(2) {
+    margin-left: var(--small-gap);
+  }
+`;
+
+const ToneInput = styled.input``;
+const ToneOption = styled.span``;
+const ToneLabel = styled.label`
+  margin-left: calc(var(--small-gap) / 3);
+`;
