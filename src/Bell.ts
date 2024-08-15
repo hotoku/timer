@@ -4,16 +4,22 @@ class Bell {
   nextSchdule: number | null;
   running: boolean;
   intervals: number[];
+  tones: number[];
   pos: number;
-  constructor(running: boolean = false, intervals: number[] = [1]) {
+  constructor(
+    running: boolean = false,
+    intervals: number[] = [1],
+    tones: number[] = [440]
+  ) {
     this.nextSchdule = null;
     this.running = running;
     this.intervals = intervals;
+    this.tones = tones;
     this.pos = 0;
   }
   loop() {
     if (this.running) {
-      ringBell();
+      ringBell(this.tones[this.pos]);
       const interval = this.intervals[this.pos];
       this.pos += 1;
       this.pos %= this.intervals.length;
