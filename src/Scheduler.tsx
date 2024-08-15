@@ -38,6 +38,7 @@ function Scheduler(): React.ReactElement {
     const obj = {
       name: name,
       intervals: bell.intervals,
+      tones: bell.tones,
     };
     saveSchedule(obj);
   };
