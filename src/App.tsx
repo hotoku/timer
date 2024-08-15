@@ -5,17 +5,22 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Player from "./Player";
 import Editor from "./Editor";
 import Header from "./Header";
+import { ErrorBoundary } from "react-error-boundary";
+import DisplayError from "./DisplayError";
 
 function App(): React.ReactElement {
   return (
     <Base>
       <BrowserRouter basename="/timer">
         <Header />
+
         <Main>
-          <Routes>
-            <Route path="/" element={<Player />} />
-            <Route path="/edit" element={<Editor />} />
-          </Routes>
+          <ErrorBoundary fallback={<DisplayError />}>
+            <Routes>
+              <Route path="/" element={<Player />} />
+              <Route path="/edit" element={<Editor />} />
+            </Routes>
+          </ErrorBoundary>
         </Main>
       </BrowserRouter>
     </Base>

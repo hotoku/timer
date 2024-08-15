@@ -31,3 +31,15 @@ export function deleteSchedule(name: string): void {
   const schedules2 = schedules.filter((s) => s.name !== name);
   localStorage.setItem(storageName, JSON.stringify(schedules2));
 }
+
+export function showAll(): string {
+  let result = "";
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k === null) {
+      continue;
+    }
+    result += localStorage.key(i) + " = " + localStorage.getItem(k) + "\n";
+  }
+  return result;
+}
