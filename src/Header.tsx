@@ -5,7 +5,7 @@ import styled from "styled-components";
 function Header(): React.ReactElement {
   return (
     <MyHeader>
-      <nav>
+      <nav style={{ display: "inline-block" }}>
         <ul>
           <li>
             <MyLink to="/">player</MyLink>
@@ -45,5 +45,9 @@ const MyHeader = styled.header`
   }
   li + li {
     margin-left: var(--basic-gap);
+  }
+  width: 100%;
+  .clear-button {
+    text-align: right;
   }
 `;
